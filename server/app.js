@@ -2,15 +2,28 @@ const express = require('express');
 const cors = require('cors');
 const ApiError = require('./app/api-error');
 const userRoute = require("./app/routes/userRoutes");
-const menuRoute= require("./app/routes/menuRoutes");
+const productRoute= require("./app/routes/productRoutes");
+const orderRoute= require("./app/routes/orderRoutes");
 const { validateToken } = require('./app/middleware/validateTokenHandle');
+const session = require("express-session")
 
 const app = express();
 
 app.use(express.json());
 
+app.use(session({
+    secret: "anson the dev",
+    saveUninitialized: false,
+    resave: false,
+    cookie:{
+        maxAge: 60000  * 60,
+        
+    }
+}))
+
 app.use("/api/user",userRoute);
-app.use("/api/menu",menuRoute);
+app.use("/api/product", productRoute);
+app.use("/api/order",validateToken,orderRoute);
 
 app.use((req, res, next)=>{
     return next(new ApiError(404,"Resource not found"));

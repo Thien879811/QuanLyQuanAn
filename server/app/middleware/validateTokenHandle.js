@@ -9,11 +9,11 @@ exports.validateToken = async(req, res, next) => {
         const accessTokenSecret = process.env.ACCESS_TOKEN_SECERT || 'defaultSecretValue';
         jwt.verify(token, accessTokenSecret,(err, decoded)=>{
             if(err){
-                res.status(401);
-                throw new Error("User is not authorized");
+                res.status(401).json({message:"User not login"});
+            }else{
+                req.user = decoded.user;
+                next();
             }
-            req.user = decoded.user;
-            next();
         });
 
         if(!token){

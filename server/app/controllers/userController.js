@@ -46,7 +46,7 @@ exports.loginUser= async (req, res, next)=>{
     const {username, password} = req.body;
 
     if(!username || !password){
-        res.status(400);
+        res.status(400).json({message:""});
         throw new ApiError("All fields are madatory");
     }
 
@@ -66,8 +66,7 @@ exports.loginUser= async (req, res, next)=>{
         );
         res.status(200).json({ accessToken });
     }else{
-        res.status(401)
-        throw new ApiError("email or password")
+        res.status(401).json({message: "username and password"})
     }
 }
 

@@ -24,7 +24,7 @@ router.get('/current', function (req, res, next) {
         const accessTokenSecret = process.env.ACCESS_TOKEN_SECERT || 'defaultSecretValue';
         jwt.verify(token, accessTokenSecret, (err, decoded)=>{
             if(err){
-                res.status(401);
+                res.status(401).json({message:""});
                 throw new Error("User is not authorized");
             }
             req.user = decoded.user;

@@ -9,6 +9,9 @@ const userSchema = mongoose.Schema({
             type: String,
             require: [true, "Please add the user password"],
         },
+        is_admin:{
+            type: Boolean,
+        }
         
     },
     {
