@@ -13,4 +13,4 @@ const tableSchema = mongoose.Schema({
     },
 );
 
-module.exports = mongoose.model("Table",userSchema);
+module.exports = mongoose.model("Table",tableSchema);

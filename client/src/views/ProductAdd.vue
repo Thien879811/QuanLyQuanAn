@@ -32,7 +32,6 @@ export default{
     methods: {
         async addProduct(data) {
             try {
-                
                 const document = await ProductService.create(data);
                 console.log(document)
                 this.message = "Liên hệ được cập nhật thành công.";

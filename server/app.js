@@ -4,6 +4,7 @@ const ApiError = require('./app/api-error');
 const userRoute = require("./app/routes/userRoutes");
 const productRoute= require("./app/routes/productRoutes");
 const orderRoute= require("./app/routes/orderRoutes");
+const tableRoute= require("./app/routes/tableRoutes");
 const { validateToken } = require('./app/middleware/validateTokenHandle');
 const session = require("express-session")
 
@@ -23,7 +24,8 @@ app.use(session({
 
 app.use("/api/user",userRoute);
 app.use("/api/product", productRoute);
-app.use("/api/order",validateToken,orderRoute);
+app.use("/api/order",orderRoute);
+app.use("/api/table",tableRoute);
 
 app.use((req, res, next)=>{
     return next(new ApiError(404,"Resource not found"));

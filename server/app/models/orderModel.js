@@ -20,7 +20,7 @@ const Products = mongoose.Schema({
     },
     quantity:{
         type: Number,
-        require:[true,"Vui lòng nhập số lượng"]
+        default: 1
     }
 })
 

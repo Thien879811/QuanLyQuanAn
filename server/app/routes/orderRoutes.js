@@ -15,5 +15,8 @@ router.route("/")
 router.route("/:id")
     .put(Order.updateMenu)
 
+router.route("/search/:id")
+    .get(Order.searchOrder)
+
  
 module.exports = router;
