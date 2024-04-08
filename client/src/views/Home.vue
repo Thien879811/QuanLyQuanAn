@@ -30,30 +30,15 @@
                 <v-row class="mt-9">
                     <v-col cols="12" sm="6" >
                         <v-toolbar class="" flat>
-                            <h5>My Filtres:</h5>
-                            <v-icon class="ml-1" small></v-icon>
-                            <h5 class="ml-1">First Meal</h5>
-                            <v-chip class="ma-2" color="green" text-color="white" dense>
-                                <v-avatar left>
-                                    <v-icon></v-icon>
-                                </v-avatar>
-                                After Training
-                            </v-chip>
-                            <v-spacer></v-spacer>
                             <h6 class="green--text" @click="addProduct()">Thêm sản phẩm</h6>
                         </v-toolbar>
                     </v-col>
 
                     <v-col cols="12" sm="6">
                         <v-toolbar class="" flat >
-                            <h5>Popular Filtres:</h5>
-                            <v-icon class="ml-1" small></v-icon>
-                            <h5 class="ml-1">Slim Waist</h5>
-                            <v-spacer></v-spacer>
-                            <v-icon class="ml-1" small></v-icon>
-                            <h5 class="ml-1">Diet</h5>
                         </v-toolbar>
-                    </v-col>  
+                    </v-col> 
+                     
                 </v-row>
             </v-tool-bar>
 
@@ -77,6 +62,8 @@
             </v-row>
         </v-container>
         {{ message }}
+
+        
     </v-app>
 </template>
 <script>

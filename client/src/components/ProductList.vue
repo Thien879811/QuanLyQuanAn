@@ -1,4 +1,5 @@
 <template>
+   
     <v-table height="600px"  fixed-header>
         <thead>
         <tr >
@@ -31,7 +32,12 @@
        
     </v-table>
     
-    <div class="tongcong">Tổng cộng : {{ sumOrder }}</div>
+    <div class="tongcong">
+        <h4> Tổng cộng : {{ sumOrder }}</h4>
+        <div>
+        <button @click="updataOrder()" class="btn btn-primary mt-2 btn-thanhtoan">Thanh toán</button>
+        </div>
+    </div>
 </template>
 <script>
 import orderService from "@/services/order.service";
@@ -117,6 +123,18 @@ import orderService from "@/services/order.service";
                     });
 
                     this.sumOrder = sum;
+                },
+
+
+                async updataOrder(){
+                    try{
+                        this.orders.status = true;
+
+                        let docoment = await orderService.update(this.orders._id, this.orders)
+                        console.log(docoment)
+                    }catch(err){
+                        console.log(err)
+                    }
                 }
 
             },
@@ -127,8 +145,10 @@ import orderService from "@/services/order.service";
 
 </script>
 <style>
+.btn-thanhtoan{
+    float: right; 
+}
 .tongcong{
-    display: inline-block;
     float: right;
 }
 </style>

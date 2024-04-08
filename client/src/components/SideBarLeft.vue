@@ -31,8 +31,7 @@ export default {
  data: () => ({
         selectedItem: 0,
         items: [
-            {text: 'OVERVIEW', route: '/overview'},
-            {text: 'MENU', route: '/menu'},
+            {text: 'MENU', route: '/home'},
             {text: 'TRANSACTION', route: '/transaction'},
             {text: 'CALENDAR', route: '/calnedar'},
             {text: 'TESTIMONIALS', route: '/testimontails'},

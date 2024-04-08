@@ -56,6 +56,7 @@ exports.findAll = async (req, res, next)=>{
 }
 
 exports.createMenu = async (req, res, next) => {
+
     if (!req.body?.customer) {
         return next(new Error(400, "Name can not be empty"));
     }
@@ -64,6 +65,7 @@ exports.createMenu = async (req, res, next) => {
         customer : req.body.customer,
         status : false
     })
+
     const product = req.body.product[0];
     
 // tim thay them san pham vao
@@ -84,12 +86,14 @@ exports.createMenu = async (req, res, next) => {
        
         try{
             const document = await order.findByIdAndUpdate(orderData._id, orderData)
-            res.send(document)
+            return res.send(document)
         }catch{
             return next(
                 new Error(500, "An error occurred while creating the contact")
             ); 
         }
+
+
     }
 
     //khong tim thay tao order moi
@@ -101,4 +105,6 @@ exports.createMenu = async (req, res, next) => {
             new Error(500, "An error occurred while creating the contact")
         );
     }
+
+
 };
