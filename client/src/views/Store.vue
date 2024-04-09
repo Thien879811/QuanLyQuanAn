@@ -3,7 +3,7 @@
     <v-app id="inspire">
         <SideBarLeft/>
         <IngredientsList v-if="product" v-bind:product="product"/>
-        <button v-if="!active" class="btn btn-primary" @click="action()">Thêm</button>
+        <button v-if="!active" class="btn btn-primary mt-2" @click="action()">Thêm</button>
         <IngredientsForm v-if="active" @submit:product="addProduct"/>
    </v-app>
   

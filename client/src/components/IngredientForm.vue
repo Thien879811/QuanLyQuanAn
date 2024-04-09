@@ -5,7 +5,7 @@
         <Field style="width: 25%;"  placeholder="giá mua" name="bayPrice" type="number" class="form-control form-control-customer" v-model="product.bayPrice"/>
         <Field style="width: 25%;"  placeholder="số lượng" name="quantity" type="number" class="form-control form-control-customer" v-model="product.quantity"/>
     </div>
-    <button class="btn btn-primary mt-2">Lưu</button>
+    <button class="btn btn-primary mt-2 ">Lưu</button>
 </Form>
 </template>
 <script>
@@ -19,16 +19,19 @@ export default{
         ErrorMessage,
     },
 
+    props:{
+        products:{
+            default:{
+            }
+        }
+    },
+
     emits: ["submit:product"],
 
     data(){
         return {
-            product:{
-                productName:"",
-                bayPrice:"",
-                quantity:""
-            },
-        };
+            product: this.products
+        }
     },
     methods: {
         submit() {
@@ -42,5 +45,9 @@ export default{
 
 .form{
     display: flex;
+}
+
+.btn{
+    float: right;
 }
 </style>
