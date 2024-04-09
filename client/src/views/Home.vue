@@ -21,7 +21,7 @@
 
                         <v-col cols="12" sm="2">
                             <v-btn class="">
-                                <v-icon></v-icon> Filter
+                                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
                             </v-btn>
                         </v-col>
                     </v-row>

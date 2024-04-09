@@ -16,14 +16,15 @@
                         <v-icon v-text="item.icon"></v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title v-text="item.text"></v-list-item-title>
+                        <router-link :to="item.route" class="text-light">
+                            <v-list-item-title v-text="item.text"></v-list-item-title>
+                        </router-link>
                     </v-list-item-content>
                     </v-list-item> 
             </v-list-item-group>
         </v-list>
     </v-navigation-drawer>
-
-    
+ 
 </template>
 
 <script>
@@ -32,10 +33,10 @@ export default {
         selectedItem: 0,
         items: [
             {text: 'MENU', route: '/home'},
-            {text: 'TRANSACTION', route: '/transaction'},
-            {text: 'CALENDAR', route: '/calnedar'},
-            {text: 'TESTIMONIALS', route: '/testimontails'},
-            {text: 'FAQ', route: '/faq'},
+            {text: 'ADD PRODUCT', route: '/product'},
+            {text: 'STORE', route: '/store'},
+            {text: 'DASHBOARD', route: '/dashboard'},
+            {text: 'LOG OUT', route: '/logout'},
         ]
         })
 }

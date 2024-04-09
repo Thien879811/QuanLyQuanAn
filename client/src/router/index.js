@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import ContactBook from "@/views/ContactBook.vue";
+import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
 
 
@@ -7,7 +7,7 @@ const routes = [
     {
     path: "/",
     name: "contactbook",
-    component: ContactBook,
+    component: Login,
     },
 
     {
@@ -26,6 +26,19 @@ const routes = [
         path: "/product",
         name: "addproduct",
         component: () => import("@/views/ProductAdd.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+
+    {
+        path: "/dashboard",
+        name: "dashboard",
+        component: () => import("@/views/Dashboard.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+    {
+        path: "/store",
+        name: "store",
+        component: () => import("@/views/Store.vue"),
         props: true // Truyền các biến trong $route.params vào làm props
     },
     // {
