@@ -13,5 +13,6 @@ router.route("/")
 
 router.route("/:id")
     .put(store.update)
+    .delete(store.delete)
  
 module.exports = router;

@@ -53,3 +53,14 @@ exports.create = async (req, res, next) => {
         );
     }
 };
+
+exports.delete = async (req, res, next) => {
+    try {
+        const document = await table.findByIdAndDelete(req.params.id);
+        return res.send(document);
+    } catch (error) {
+        return next(
+            new Error(500, "An error occurred while creating the contact")
+        );
+    }
+};

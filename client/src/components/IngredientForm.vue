@@ -4,8 +4,9 @@
         <Field style="width: 50%;"  placeholder="Tên nguyên liệu" name="productName" type="text" class="form-control form-control-customer" v-model="product.productName"/>
         <Field style="width: 25%;"  placeholder="giá mua" name="bayPrice" type="number" class="form-control form-control-customer" v-model="product.bayPrice"/>
         <Field style="width: 25%;"  placeholder="số lượng" name="quantity" type="number" class="form-control form-control-customer" v-model="product.quantity"/>
+        <button class="btn text-dark" @click="exit()"><font-awesome-icon :icon="['fas', 'circle-xmark']" /></button>
     </div>
-    <button class="btn btn-primary mt-2 ">Lưu</button>
+    <button class="btn btn-primary mt-2 mr-10">Lưu</button>
 </Form>
 </template>
 <script>
@@ -37,6 +38,9 @@ export default{
         submit() {
             this.$emit("submit:product", this.product);
         },
+        exit(){
+            location.reload()
+        }
     },
 };
 </script>

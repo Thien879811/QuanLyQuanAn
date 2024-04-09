@@ -1,4 +1,9 @@
 <template>
+    <Form @submit="search">
+        <Field type="date" name="date" id="" v-model="date"/>
+        <button class="ml-2"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></button>
+    </Form>
+    {{ message }}
     <v-table>
         <thead>
         <tr >
@@ -19,12 +24,16 @@
                 <td>{{ product.bayPrice }}</td>
                 <td>
 
-                    <button class="btn"@click="disincreased(product)">-</button>
-                    {{ product.quantity }}
-                    <button class="btn" @click="increased(product)">+</button>
-
-                    <button class="btn" @click="addEdit(product)"><font-awesome-icon :icon="['fas', 'pen']" /></button>
                     
+                    {{ product.quantity }}
+                 
+
+                  
+                        <button class="btn" @click="addEdit(product)"><font-awesome-icon :icon="['fas', 'pen']" /></button>
+
+                        <button class="btn" @click="deleteProduct(product._id)"><font-awesome-icon :icon="['fas', 'trash']" /></button>
+
+                
                 </td>
                 
             </tr>
@@ -37,8 +46,12 @@
 <script>
 import storeService from '@/services/store.service';
 import IngredientForm from './IngredientForm.vue';
+import {Form, Field, ErrorMessage} from "vee-validate";
 export default{
     components:{
+        Form,
+        Field,
+        ErrorMessage,
         IngredientForm
     },
     props:{
@@ -48,6 +61,8 @@ export default{
         return {
             products : this.product,
             product_edit: null,
+            date:null,
+            message:""
         }
     },
     methods:{
@@ -65,10 +80,22 @@ export default{
             }catch(err){
                 console.log(err)
             }
+        },
+
+        async deleteProduct(id){
+            confirm("Bạn có chắc xóa nguyên liệu này")
+            try{
+                await storeService.delete(id);
+                confirm("Xóa thành công")
+                location.reload()
+            }catch(err){
+                console.log(err)
+            }
+        },
+
+        async search(){
+            this.message = this.date
         }
     },
-    created(){
-        console.log(this.products)
-    }
 }
 </script>
