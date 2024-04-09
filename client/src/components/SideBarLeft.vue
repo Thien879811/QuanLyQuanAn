@@ -34,6 +34,7 @@ export default {
         items: [
             {text: 'MENU', route: '/home'},
             {text: 'ADD PRODUCT', route: '/product'},
+            {text: 'EDIT PRODUCT', route: '/edit_product'},
             {text: 'STORE', route: '/store'},
             {text: 'DASHBOARD', route: '/dashboard'},
             {text: 'LOG OUT', route: '/logout'},

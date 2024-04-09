@@ -41,6 +41,13 @@ const routes = [
         component: () => import("@/views/Store.vue"),
         props: true // Truyền các biến trong $route.params vào làm props
     },
+    {
+        path: "/edit_product",
+        name: "editproduct",
+        component: () => import("@/views/EditProduct.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+    
     // {
     //     path: "/product",
     //     name: "home.product",

@@ -55,6 +55,7 @@
                                 <v-chip class="ma-2" color="grey lighten-3" text-color="red" dense>
                                     {{ product.price }}
                                 </v-chip> 
+                                
                             </div>
                         </v-card>
                     </v-hover>

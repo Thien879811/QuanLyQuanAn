@@ -62,11 +62,13 @@ export default{
         Field,
         ErrorMessage,
     },
-
+    props:{
+        products: {default:{}}
+    },
     emits: ["submit:product"],
     data(){
         return {
-            product:{},
+            product : this.products,
         };
     },
     methods: {
