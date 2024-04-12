@@ -37,7 +37,7 @@ exports.register = async (req, res, next) => {
         res.status(201).json({_id: user.id, username: user.username});
     }else{
         res.status(400);
-        throw new ApiError("User data us not valid");
+        throw new ApiError("User data us not valid")
     }
 }
 

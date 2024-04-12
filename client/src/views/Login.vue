@@ -1,7 +1,7 @@
 
 <template>
     <div class="page">
-        <h4>Hiệu chỉnh Liên hệ</h4>
+        <h4>Đăng nhập</h4>
         <UserForm
             @submit:user="login"
         />
@@ -33,7 +33,7 @@ export default{
                 else{
                     localStorage.setItem("token",this.token.accessToken);
                     console.log(localStorage.getItem("token"));
-                    this.$router.push('/product')
+                    this.$router.push('/home');
                 }
             } catch (error) {
                 console.log(error);
