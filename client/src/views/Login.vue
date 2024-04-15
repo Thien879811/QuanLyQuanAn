@@ -32,7 +32,10 @@ export default{
                 }
                 else{
                     localStorage.setItem("token",this.token.accessToken);
-                    console.log(localStorage.getItem("token"));
+                    let user = await UserService.current(this.token.accessToken);
+                    console.log(user)
+                    localStorage.setItem("username",user.username);
+                    localStorage.setItem("id",user.id)
                     this.$router.push('/home');
                 }
             } catch (error) {

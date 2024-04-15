@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
      
-        <SideBarLeft />
+        <SideBarLeft/>
         <SideBarRight v-model:active="active"/>
         <div v-if="activeTable()">
             <ProductList :table_id="active" />

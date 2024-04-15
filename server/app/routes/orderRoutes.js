@@ -18,5 +18,11 @@ router.route("/:id")
 router.route("/search/:id")
     .get(Order.searchOrder)
 
+router.route("/total-sales")
+    .get(Order.getTotalSale)
+    
+router.route("/total-sales/:date")
+    .get(Order.getTotalSale)
+ 
  
 module.exports = router;

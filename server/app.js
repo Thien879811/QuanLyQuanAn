@@ -24,7 +24,7 @@ app.use(session({
 }))
 
 app.use("/api/user",userRoute);
-app.use("/api/product", productRoute);
+app.use("/api/product",productRoute);
 app.use("/api/order",orderRoute);
 app.use("/api/table",tableRoute);
 app.use("/api/store",storeRoute);

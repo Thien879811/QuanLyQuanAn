@@ -129,9 +129,9 @@ import orderService from "@/services/order.service";
                 async updataOrder(){
                     try{
                         this.orders.status = true;
-
                         let docoment = await orderService.update(this.orders._id, this.orders)
-                        console.log(docoment)
+                        confirm("Thành công")
+                        location.reload()
                     }catch(err){
                         console.log(err)
                     }

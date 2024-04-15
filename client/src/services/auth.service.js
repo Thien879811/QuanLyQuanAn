@@ -9,8 +9,19 @@ class userService{
         return (await this.api.post("/login",data)).data;
     }
 
-    async current(data){
-        return (await this.api.post("/current",data)).data;
+    async current(token) {
+        try {
+            // Gửi token về máy chủ trong phần header
+            const response = await this.api.get("/current", {
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error occurred during fetching current user:", error);
+            throw error;
+        }
     }
 }
 

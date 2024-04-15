@@ -17,6 +17,7 @@ router.route("/login")
 
 
 router.get('/current', function (req, res, next) {
+    console.log(req.headers.authorization)
     let token;
     let authHeader = req.headers.Authorization || req.headers.authorization;
     if(authHeader && authHeader.startsWith("Bearer")){

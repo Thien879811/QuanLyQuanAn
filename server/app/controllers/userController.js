@@ -71,5 +71,5 @@ exports.loginUser= async (req, res, next)=>{
 }
 
 exports.currentUser = async(req, res)=>{
-    res.json(req.user);
+    res.send(req.user);
 };

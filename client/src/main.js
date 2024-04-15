@@ -18,6 +18,8 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+//chart
+import CanvasJSChart from '@canvasjs/vue-charts';
 
 const vuetify = createVuetify({
     components,
@@ -28,5 +30,6 @@ createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)
 .use(router)
 .use(vuetify)
+.use(CanvasJSChart)
 .mount('#app')
 
