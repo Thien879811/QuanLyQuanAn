@@ -1,7 +1,6 @@
 const Error = require("../api-error");
 const order = require("../models/orderModel");
 exports.getTotalSale = async (req, res, next) => {
-    console.log(req.params.date)
     try {
       const query = {};
   
@@ -51,64 +50,7 @@ exports.getTotalSale = async (req, res, next) => {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-  };
-
-// exports.getTotalSale = async (req, res, next) => {
-//     try {
-//       const query = {};
-  
-//       if (req.params.date) {
-//         const date = new Date(req.params.date);
-//         query.createdAt = {
-//           $gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
-//           $lt: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
-//         };
-//       }
-  
-//       const result = await order.aggregate([
-//         {
-//           $unwind: "$product",
-//         },
-//         {
-//           $match: query,
-//         },
-//         {
-//           $group: {
-//             _id: {
-//               $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
-//             },
-//             totalSales: { $sum: { $multiply: ["$product.price", "$product.quantity"] } },
-//           },
-//         },
-//       ]);
-  
-//       res.json(result);
-//     } catch (err) {
-//       res.status(500).json({ error: err.message });
-//     }
-// };
-
-// exports.getTotalSale = async(req, res, next)=>{
-//     console.log(req.params.date)
-//     try {
-//         const result = await order.aggregate([
-//             {
-//               $unwind: "$product" // Mở rộng mảng product thành các bản ghi riêng lẻ
-//             },
-//             {
-//               $group: {
-//                 _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-//                 totalSales: { $sum: { $multiply: ["$product.price", "$product.quantity"] } }
-//               }
-//             }
-//           ]);
-    
-//         res.json(result);
-//       } catch (err) {
-//         res.status(500).json({ error: err.message });
-//       }
-// }
-
+};
 exports.searchOrder = async (req, res, next)=>{
     if(!req.params.id){
         res.send("message: null")

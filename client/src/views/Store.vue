@@ -60,7 +60,7 @@ import storeService from '@/services/store.service';
 
       exit(){
         this.active = false
-      }
+      },
     },
     created(){
       this.getProduct();

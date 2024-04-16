@@ -135,8 +135,11 @@ export default {
   methods:{
     // lay du lieu order theo lua chon
     async getOrder(data){
-      if(!data) data=''
+
+      if(!data) data = '';
+
       console.log( `du lieu ngay nhap vo la ${data}`)
+      
       try{
         this.orders = await orderService.getTotal(data)
         console.log(this.orders)
@@ -160,11 +163,13 @@ export default {
       }
     },
 
-    //capnhat item cho select
+    //cap nhat item cho select
     updateItemSelect(){
       this.items = this.data.map(item => ([ item._id]));
-      
+      console.log(this.items)
     },
+
+
     updateChart() {
       const dataPoints = this.data.map(item => ({ label: item._id, y: item.totalSales }));
       dataPoints.sort(function(dp1, dp2) {

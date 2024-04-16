@@ -6,6 +6,9 @@ class storeService {
     async getAll() {
         return (await this.api.get("/")).data;
     }
+    async getDate() {
+        return (await this.api.get("/store-date/get")).data;
+    }
     async create(data) {
         return (await this.api.post("/", data)).data;
     }
@@ -20,6 +23,10 @@ class storeService {
     }
     async delete(id) {
         return (await this.api.delete(`/${id}`)).data;
+    }
+
+    async getAllByDate(date) {
+        return (await this.api.get(`/${date}`)).data;
     }
 }
 export default new storeService();

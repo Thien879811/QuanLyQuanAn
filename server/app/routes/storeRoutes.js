@@ -14,5 +14,12 @@ router.route("/")
 router.route("/:id")
     .put(store.update)
     .delete(store.delete)
+
+router.route("/store-date/get")
+    .get(store.findDate)
+
+router.route("/:date")
+    .get(store.findAll)
+
  
 module.exports = router;

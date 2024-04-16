@@ -17,6 +17,10 @@ const  storeSchema = mongoose.Schema({
         type: Number,
         require:[true,"Vui lòng nhập số lượng còn lại trong kho"]
     }
-})
+},
+{
+    timestamps: true,
+} 
+)
 
 module.exports = mongoose.model("Store",storeSchema);

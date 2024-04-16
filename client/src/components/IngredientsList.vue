@@ -1,8 +1,20 @@
 <template>
-    <Form @submit="search">
-        <Field type="date" name="date" id="" v-model="date"/>
-        <button class="ml-2"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></button>
-    </Form>
+<Form @submit="selectData">
+    <v-row>
+        <v-col cols="12" sm="11">
+            <v-select
+            v-if="items"  
+            label="Chọn"
+            :items="items"
+            v-model="date"
+            >
+            </v-select>
+        </v-col>
+        <v-col class="mt-1">
+            <button type="submit">Tìm</button>
+        </v-col>
+    </v-row>
+</Form>
     {{ message }}
     <v-table>
         <thead>
@@ -59,9 +71,10 @@ export default{
     },
     data(){
         return {
+            items: null,
+            date: null,
             products : this.product,
             product_edit: null,
-            date:null,
             message:""
         }
     },
@@ -93,9 +106,23 @@ export default{
             }
         },
 
-        async search(){
-            this.message = this.date
+        async getDate(){
+            const data = await storeService.getDate();
+            this.items = data.map(item => ([item._id]));
+            console.log(this.items)
+        },
+
+        async selectData(){
+            try{
+                this.products = await storeService.getAllByDate(this.date),
+                console(this.products)
+            }catch(err){
+                console.log(err)
+            }
         }
     },
+    created(){
+        this.getDate()
+    }
 }
 </script>
