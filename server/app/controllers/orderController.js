@@ -1,5 +1,84 @@
 const Error = require("../api-error");
 const order = require("../models/orderModel");
+const product = require("../models/productModel");
+
+
+
+exports.countProductOccurrences = async (req, res, next) => {
+  const result = await order.aggregate([
+    {
+      $unwind: "$product",
+    },
+    {
+      $group: {
+        _id: "$product.productName",
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $sort: {
+        _id: 1,
+      },
+  },
+  ]);
+
+  res.send(result)
+}
+
+exports.getToltaByDate = async (req, res, next) => {
+    let date='';
+    if(req.params.date){
+      date = new Date(req.params.date)
+    } else{
+      date = new Date()
+    }
+
+    try {
+      let query = {};
+
+      if (date) {
+          query.createdAt = {
+              $gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
+              $lt: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1),
+          };
+      }
+  
+      documents = await order.aggregate([
+          {
+            $match: query,
+          },
+          {
+            $group: {
+              _id: {
+                $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+              },
+              orderCount: { $sum: 1 },
+              totalSales: {
+                $sum: {
+                  $reduce: {
+                    input: "$product",
+                    initialValue: 0,
+                    in: { $sum: ["$$value", { $multiply: ["$$this.price", "$$this.quantity"] }] },
+                  },
+                },
+              },
+            },
+          },   
+          {
+            $sort: {
+              _id: 1,
+            },
+          },
+        ]);
+      
+      return res.send(documents)
+
+  } catch (err) {
+    return next(new Error(500, "Loi"));
+  }
+    
+}
+
 exports.getTotalSale = async (req, res, next) => {
     try {
       const query = {};
@@ -16,7 +95,7 @@ exports.getTotalSale = async (req, res, next) => {
           // Filter by day
           query.createdAt = {
             $gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
-            $lt: new Date(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+            $lt: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1),
           };
         } else {
           // Invalid date format
@@ -38,6 +117,7 @@ exports.getTotalSale = async (req, res, next) => {
             },
             totalSales: { $sum: { $multiply: ["$product.price", "$product.quantity"] } },
           },
+         // count: { $sum: 1 },
         },
         {
             $sort: {

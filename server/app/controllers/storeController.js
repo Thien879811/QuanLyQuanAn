@@ -49,7 +49,16 @@ exports.findAll = async (req, res, next) => {
                 documents = await table.findByName(name);
             }
             else {
-                documents = await table.find({}) 
+                let date = new Date();
+                let query = {};
+                if (date) {
+                    query.createdAt = {
+                        $gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
+                        $lt: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1),
+                    };
+                }
+                
+                documents = await table.find(query) 
             }
         }catch(err){
             return next(
@@ -65,7 +74,7 @@ exports.findAll = async (req, res, next) => {
             query.createdAt = {
                 $gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
                 $lt: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1),
-              };
+            };
           }
           documents = await table.find(query);
         } catch (err) {

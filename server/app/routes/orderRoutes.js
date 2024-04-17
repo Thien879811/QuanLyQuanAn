@@ -18,11 +18,18 @@ router.route("/:id")
 router.route("/search/:id")
     .get(Order.searchOrder)
 
-router.route("/total-sales")
-    .get(Order.getTotalSale)
-    
 router.route("/total-sales/:date")
-    .get(Order.getTotalSale)
+    .get(Order.getToltaByDate)
+
+router.route("/total-sales")
+    .get(Order.getToltaByDate)
  
+
+router.route("/total-sales-chart")
+    .get(Order.getTotalSale)
+
+router.route("/count-product")
+    .get(Order.countProductOccurrences)
+    
  
 module.exports = router;

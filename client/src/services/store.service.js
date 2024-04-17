@@ -6,6 +6,7 @@ class storeService {
     async getAll() {
         return (await this.api.get("/")).data;
     }
+    //get date in database
     async getDate() {
         return (await this.api.get("/store-date/get")).data;
     }
@@ -24,7 +25,7 @@ class storeService {
     async delete(id) {
         return (await this.api.delete(`/${id}`)).data;
     }
-
+// get data by date
     async getAllByDate(date) {
         return (await this.api.get(`/${date}`)).data;
     }

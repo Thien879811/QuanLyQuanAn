@@ -6,9 +6,14 @@ class orderService {
     async getAll() {
         return (await this.api.get("/")).data;
     }
-    async getTotal(data) {
-        if(data) return (await this.api.get(`/total-sales/${data}`)).data;
-        return (await this.api.get(`/total-sales`)).data;
+    async getProductChart(){
+        return (await this.api.get(`/count-product`)).data;
+    }
+    async getTotal() {
+        return (await this.api.get(`/total-sales-chart`)).data;
+    }
+    async getTotalByDate(data) {
+        return (await this.api.get(`/total-sales/${data}`)).data;
     }
     async create(data) {
         return (await this.api.post("/", data)).data;

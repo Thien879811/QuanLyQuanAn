@@ -32,11 +32,11 @@ exports.findAll = async (req, res, next)=>{
         }
     }catch(err){
         return next(
-                new Error(500,"Loi")
-            );
+            new Error(500,"Loi")
+        );
         
     }
-    res.send(documents);
+    return res.send(documents);
 }
 
 exports.createMenu = async (req, res, next) => {
