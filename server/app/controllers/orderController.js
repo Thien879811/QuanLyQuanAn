@@ -19,7 +19,7 @@ exports.countProductOccurrences = async (req, res, next) => {
       $sort: {
         _id: 1,
       },
-  },
+    },
   ]);
 
   res.send(result)

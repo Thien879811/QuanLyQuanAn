@@ -33,8 +33,8 @@ export default {
         selectedItem: 0,
         items: [
             {text: 'MENU', route: '/home'},
-            {text: 'ADD PRODUCT', route: '/product'},
             {text: 'EDIT PRODUCT', route: '/edit_product'},
+            {text: 'ORDER HISTORY', route: '/order-history'},
             {text: 'STORE', route: '/store'},
             {text: 'DASHBOARD', route: '/dashboard'},
             {text: 'LOG OUT', route: '/logout'},

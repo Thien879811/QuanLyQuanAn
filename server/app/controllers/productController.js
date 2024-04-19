@@ -1,6 +1,43 @@
 const Error = require("../api-error");
 const product = require("../models/productModel");
 
+exports.searchProduct = async (req, res, next) => {
+    console.log(req.body)
+    const search = req.body.search;
+    if (!search) {
+        const result = await product.aggregate([
+            {
+                $group: {
+                    _id: "$directory",
+                    count: { $sum: 1 },
+                },
+            },
+            {
+                $sort: {
+                    _id: 1,
+                },
+            },
+        ]);
+    
+        res.status(200).send(result);
+    }
+    try {
+        if (search) {
+            const result = await product.find({
+              $or: [
+                { name: { $regex: `.*${search}.*`, $options: "i" } },
+                { directory: { $regex: `.*${search}.*`, $options: "i" } },
+              ],
+            });
+          
+            res.status(200).send(result);
+            return;
+          }
+      }
+    catch (error) {
+      next(error);
+    }
+}
 exports.updateMenu= async (req, res, next)=>{
     if(Object.keys(req.body).length==0){
         return next(new Error(400,"Dử liệu cập nhật không được để trống"))

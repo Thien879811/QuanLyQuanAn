@@ -1,6 +1,25 @@
 <template>
   <v-app id="inspire">
-     
+
+<!-- category -->
+        <Form @submit="submitSelect">
+            <v-row>
+                <v-col cols="12" sm="11">
+                    <v-select
+                    v-if="items"  
+                    label="Chọn"
+                    :items="items"
+                    v-model="dataSelect"
+                    >
+                    </v-select>
+                </v-col>
+                <v-col class="mt-1">
+                    <button type="submit">Tìm</button>
+                </v-col>
+            </v-row>
+        </Form>
+        {{ message }}
+     <!-- add product -->
         <SideBarLeft/>
         <SideBarRight v-model:active="active"/>
         <div v-if="activeTable()">
@@ -13,32 +32,13 @@
       
         <v-container v-else class="container">
             <v-tool-bar flat>
-                <v-toolbar flat class="">
-                    <v-row>
-                        <v-col cols="12" sm="10">
-                            <v-text-field label="Search"  flatbackground-color="grey lighten-3"></v-text-field>
-                        </v-col>
-
-                        <v-col cols="12" sm="2">
-                            <v-btn class="">
-                                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-toolbar>
-            
                 <v-row class="mt-9">
                     <v-col cols="12" sm="6" >
-                        <v-toolbar class="" flat>
-                            <h6 class="green--text" @click="addProduct()">Thêm sản phẩm</h6>
-                        </v-toolbar>
+                            <h6 class="green--text" @click="addProduct()">Thêm sản phẩm</h6> 
                     </v-col>
 
                     <v-col cols="12" sm="6">
-                        <v-toolbar class="" flat >
-                        </v-toolbar>
                     </v-col> 
-                     
                 </v-row>
             </v-tool-bar>
 
@@ -62,12 +62,10 @@
                 </v-col>
             </v-row>
         </v-container>
-        {{ message }}
-
-        
     </v-app>
 </template>
 <script>
+import {Form, Field, ErrorMessage} from "vee-validate";
 import ProductService from "@/services/product.service";
 import SideBarLeft from '@/components/SideBarLeft.vue';
 import SideBarRight from '@/components/SideBarRight.vue';
@@ -77,18 +75,24 @@ import { createApp } from "vue";
 
 export default {
     components: {
-      SideBarLeft,
-      SideBarRight,
-      ProductList
+        SideBarLeft,
+        SideBarRight,
+        ProductList,
+        Form,
+        Field,
+        ErrorMessage,
     },
     data(){
         return {
+            message:'',
+            dataSelect:"",
+            items:null,
             productOrder:null,
             product: null,
             active: null,
-            message:"",
             actiProduct: true,
             id_table: null,
+            category: null
         }
     },
     watch:{
@@ -97,6 +101,15 @@ export default {
         },
     },
     methods:{
+
+        async search(){
+            try{
+                this.category = await ProductService.getCategory();
+                this.items= this.category.map(c => (c._id))
+            }catch(err){
+                console.log(err)
+            }
+        },
 
         async getProduct(){
             try{
@@ -134,7 +147,6 @@ export default {
         },
 
         async create(){
-
             const order = {
 
                 customer: this.id_table,
@@ -150,6 +162,14 @@ export default {
             }catch(err){
                 console.log(err)
             }
+        },
+
+        async submitSelect(){
+            const data = {
+                search:this.dataSelect
+            }
+            this.product = await ProductService.getDateSearch(data)
+            console(this.product)
         }
 
     },
@@ -158,6 +178,7 @@ export default {
         this.active = null;
         this.message = "";
         this.actiProduct = true; 
+        this.search();
     }
 }
 </script>

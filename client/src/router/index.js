@@ -35,6 +35,14 @@ const routes = [
     },
 
     {
+        path: "/order-history",
+        name: "orderhistory",
+        component: () => import("@/views/ProductAdd.vue"),
+        props: true, // Truyền các biến trong $route.params vào làm props
+        meta: { requiresAuth: true }
+    },
+
+    {
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/Dashboard.vue"),

@@ -21,5 +21,11 @@ class productService {
     async delete(id) {
         return (await this.api.delete(`/${id}`)).data;
     }
+    async getCategory(){
+        return (await this.api.get(`/search`)).data;
+    }
+    async getDateSearch(data){
+        return (await this.api.post(`/search`,data)).data;
+    }
 }
 export default new productService();

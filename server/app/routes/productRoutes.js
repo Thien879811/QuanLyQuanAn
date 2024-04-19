@@ -14,5 +14,9 @@ router.route("/")
 
 router.route("/:id")
     .put(product.updateMenu)
+
+router.route("/search")
+    .get(product.searchProduct)
+    .post(product.searchProduct)
  
 module.exports = router;
