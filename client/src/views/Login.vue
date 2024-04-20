@@ -1,11 +1,12 @@
 
 <template>
-    <div class="page">
-        <h4>Đăng nhập</h4>
-        <UserForm
-            @submit:user="login"
+    <div class="login-gr">
+        <div class="page">
+            <h4>Đăng nhập</h4>
+            <UserForm
+                @submit:user="login"
         />
-        <p>{{ message }}</p>
+        </div>
     </div>
 </template>
 <script>
@@ -46,3 +47,17 @@ export default{
     },
 }
 </script>
+<style>
+.login-gr{
+    height: 500px;
+    display: flex;
+    align-items: center;
+}
+.page{
+    width: 500px;
+    padding: 50px;
+    border: solid 1px darkblue;
+    border-radius: 5px;
+    box-shadow: 10px 10px;
+}
+</style>

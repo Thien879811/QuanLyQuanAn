@@ -1,4 +1,5 @@
 <template>
+<div class="login-group">
     <Form
         @submit ='submit'
     >
@@ -17,7 +18,7 @@
         <label for="email">Mật khẩu</label>
         <input
         name="password"
-        type="email"
+        type="password"
         class="form-control"
         v-model="user.password"
         />
@@ -25,10 +26,10 @@
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary">Lưu</button>
+        <button class="btn btn-primary">Đăng nhập</button>
     </div>
-
     </Form>
+</div>
 </template>
 <script>
 import * as yup from "yup";
@@ -59,4 +60,6 @@ export default{
 </script>
 <style scoped>
 @import "@/assets/form.css";
+
+
 </style>

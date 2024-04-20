@@ -53,6 +53,7 @@ const routes = [
         path: "/store",
         name: "store",
         component: () => import("@/views/Store.vue"),
+        meta: { requiresAuth: true },
         props: true // Truyền các biến trong $route.params vào làm props
     },
     {
