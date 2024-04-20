@@ -6,15 +6,8 @@
             </v-list-item-title>
             <v-row class="mt-4">
                 <v-col cols="4" v-for="table in tables">
-
-                   <div v-if="tableStatus(table._id)">
+                   <div>
                         <v-btn color="green" @click="updateActiveIndex(table._id)">
-                            {{ table.tableName }}
-                        </v-btn>
-                   </div>
-
-                   <div v-else>
-                        <v-btn @click="updateActiveIndex(table._id)">
                             {{ table.tableName }}
                         </v-btn>
                    </div>
@@ -47,6 +40,7 @@ export default {
         },
 
         async tableStatus(id){
+            console.log(id)
             const orders = await orderService.search(id);
             if(!orders._id){
                 return true;

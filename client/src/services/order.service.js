@@ -33,5 +33,8 @@ class orderService {
     async search(id) {
         return (await this.api.get(`/search/${id}`)).data;
     }
+    async getOrderByDate(id) {
+        return (await this.api.get(`/orderbydate/${id}`)).data;
+    }
 }
 export default new orderService();

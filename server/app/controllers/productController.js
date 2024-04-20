@@ -1,8 +1,7 @@
 const Error = require("../api-error");
 const product = require("../models/productModel");
 
-exports.searchProduct = async (req, res, next) => {
-    console.log(req.body)
+exports.searchProduct = async (req, res, next) => { 
     const search = req.body.search;
     if (!search) {
         const result = await product.aggregate([

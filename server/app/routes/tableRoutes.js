@@ -12,6 +12,7 @@ router.route("/")
     .post(table.createMenu)
 
 router.route("/:id")
+    .get(table.findOne)
     .put(table.updateMenu)
  
 module.exports = router;

@@ -72,6 +72,7 @@ import SideBarRight from '@/components/SideBarRight.vue';
 import ProductList from '@/components/ProductList.vue';
 import orderService from '@/services/order.service'
 import { createApp } from "vue";
+import tableService from "@/services/table.service";
 
 export default {
     components: {
@@ -147,12 +148,15 @@ export default {
         },
 
         async create(){
+            const table = await tableService.get(this.id_table)
+            
             const order = {
-
+                customerName: table.tableName,
                 customer: this.id_table,
                 product:[this.productOrder],
                 status: false
             }
+            
 
             try{
                 const docoment = await orderService.create(order);

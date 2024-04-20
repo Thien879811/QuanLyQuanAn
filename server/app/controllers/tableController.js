@@ -1,6 +1,7 @@
 const Error = require("../api-error");
 const table = require("../models/tableModel");
 
+
 exports.updateMenu= async (req, res, next)=>{
     if(Object.keys(req.body).length==0){
         return next(new Error(400,"Dử liệu cập nhật không được để trống"))
@@ -38,6 +39,20 @@ exports.findAll = async (req, res, next)=>{
         
     }
     res.send(documents);
+}
+exports.findOne = async (req, res, next)=>{
+    if(!req.params.id){
+        return res.send("Loi")
+    }
+    try{
+        const documents = await table.findById(req.params.id)
+        res.send(documents);
+    }catch(err){
+        return next(
+                new Error(500,"Loi")
+            );
+        
+    }
 }
 
 exports.createMenu = async (req, res, next) => {

@@ -2,7 +2,18 @@ const Error = require("../api-error");
 const order = require("../models/orderModel");
 const product = require("../models/productModel");
 
-
+exports.getOrderByDate = async (req, res, next) => {
+  if(req.params.data){
+    let query = {};
+      const date = new Date(req.params.data)
+      query.createdAt = {
+          $gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
+          $lt: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1),
+      }
+      const documents = await order.find(query);
+      return res.send(documents)
+  }
+}
 
 exports.countProductOccurrences = async (req, res, next) => {
   const result = await order.aggregate([

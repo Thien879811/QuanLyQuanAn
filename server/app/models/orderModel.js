@@ -25,6 +25,10 @@ const Products = mongoose.Schema({
 })
 
 const orderSchema = mongoose.Schema({
+    customerName: {
+        type: String,
+        require: [true, "Vui lòng nhập tên khách"]
+    },
     customer: {
         type: String,
         require: [true, "Vui lòng nhập tên khách hàng hoặc số bàn"]

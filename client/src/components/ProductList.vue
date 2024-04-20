@@ -1,5 +1,5 @@
 <template>
-   
+    <h4>Bàn: {{ tableName }}</h4>
     <v-table height="600px"  fixed-header>
         <thead>
         <tr >
@@ -41,6 +41,7 @@
 </template>
 <script>
 import orderService from "@/services/order.service";
+import tableService from "@/services/table.service";
     export default{
         props:{
             table_id: { type: String},
@@ -52,6 +53,7 @@ import orderService from "@/services/order.service";
         },
         data(){
             return{
+                tableName:null,
                 orders: null,
                 productTable:null,
                 message:'',
@@ -62,12 +64,13 @@ import orderService from "@/services/order.service";
 
                 async getOrder(){
                     try{
-                        console.log(this.table_id);
                         this.orders = await orderService.search(this.table_id);
                         this.productTable = this.orders.product;
-                        console.log(this.productTable)
+                    //get name table
+                        const table = await tableService.get(this.table_id)
+                        this.tableName = table.tableName
+                        console.log(this.tableName)
                     }catch(err){
-                        this.productTable=[];
                         console.log(err);
                     }
 
@@ -129,6 +132,7 @@ import orderService from "@/services/order.service";
                 async updataOrder(){
                     try{
                         this.orders.status = true;
+                        console.log(this.orders)
                         let docoment = await orderService.update(this.orders._id, this.orders)
                         confirm("Thành công")
                         location.reload()
@@ -139,7 +143,8 @@ import orderService from "@/services/order.service";
 
             },
         created(){
-                this.getOrder()
+            this.productTable=null;
+            this.getOrder()
         }
     }
 

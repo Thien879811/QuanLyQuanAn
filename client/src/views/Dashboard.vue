@@ -157,7 +157,7 @@ export default {
     // lay du lieu order theo lua chon
     async getOrder(data){
 
-      if(!data) data = '';
+      if(!data) data = new Date();
 
       try{
         this.orders = await orderService.getTotalByDate(data)
