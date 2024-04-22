@@ -11,6 +11,7 @@ const router = express.Router();
 router.route("/")
     .get(Order.findAll)
     .post(Order.createMenu)
+    
 router.route("/orderbydate/:data")
     .get(Order.getOrderByDate)
 

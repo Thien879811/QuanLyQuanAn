@@ -3,6 +3,7 @@
     <div class="login-gr">
         <div class="page">
             <h4>Đăng nhập</h4>
+            <span>{{ message }}</span>
             <UserForm
                 @submit:user="login"
         />
@@ -29,17 +30,23 @@ export default{
             try {
                 this.token = await UserService.login(data);
                 if(!this.token.accessToken){
-                    this.message = this.token.message;
+                    this.message = "Tài khoản hoặc mật khẩu không chính sát"
+                    this.$router.push('/');
                 }
                 else{
                     localStorage.setItem("token",this.token.accessToken);
-                    let user = await UserService.current(this.token.accessToken);
+                    let user = [] ;
+                    user = await UserService.current(this.token.accessToken);
+                    localStorage.setItem("user",JSON.stringify(user));
                     console.log(user)
-                    localStorage.setItem("username",user.username);
-                    localStorage.setItem("id",user.id)
-                    this.$router.push('/home');
+                      if(user.is_admin){
+                        this.$router.push('/home');
+                    }else{
+                        this.$router.push('/home-page');
+                    }
                 }
             } catch (error) {
+                this.message = "Tài khoản hoặc mật khẩu không chính sác"
                 console.log(error);
             }
         },

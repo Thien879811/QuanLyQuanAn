@@ -148,3 +148,12 @@ import tableService from "@/services/table.service";
       
 }
 </script>
+
+<style>
+@media only screen and (max-width: 1960px) {
+    .container{
+        max-width: 980px;
+    }
+}
+
+</style>

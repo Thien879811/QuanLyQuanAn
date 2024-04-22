@@ -5,10 +5,10 @@
      <SideBarLeft />
      <SideBarRight v-model:active="active"/>
      <v-container class="container">
-             <div v-if="product" class="page mt-5">
-                <h4>Thêm sản món ăn</h4>
+             <div class="page mt-5">
+                <h4>Thêm món ăn mới</h4>
                 <ProductForm
-                    :product="product"
+                    v-bind:product="product"
                     @submit:product="addProduct"
                 />
             </div>
@@ -35,12 +35,20 @@ export default{
     
     data(){
         return {
-            product: { },
+            
+            product:{},
             message:"",
         }
     },
 
     methods: {
+        async search(){
+            try{
+                this.category = await ProductService.getCategory();
+            }catch(err){
+                console.log(err)
+            }
+        },
         async addProduct(data) {
             try {
                 const document = await ProductService.create(data);

@@ -17,7 +17,10 @@ const routes = [
         path: "/home",
         name: "home",
         component: Home,
-        meta: { requiresAuth: true }
+        meta: { 
+            requiresAuth: true,
+            requiresAdmin: true 
+        }
     },
 
     {
@@ -31,7 +34,10 @@ const routes = [
         name: "addproduct",
         component: () => import("@/views/ProductAdd.vue"),
         props: true, // Truyền các biến trong $route.params vào làm props
-        meta: { requiresAuth: true }
+        meta: { 
+            requiresAuth: true,
+            requiresAdmin: true 
+        }
     },
 
     {
@@ -39,27 +45,39 @@ const routes = [
         name: "orderhistory",
         component: () => import("@/views/OrderHistory.vue"),
         props: true, // Truyền các biến trong $route.params vào làm props
-        meta: { requiresAuth: true }
+        meta: { 
+            requiresAuth: true,
+            requiresAdmin: true 
+        }
     },
 
     {
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/Dashboard.vue"),
-        meta: { requiresAuth: true },
+        meta: { 
+            requiresAuth: true,
+            requiresAdmin: true 
+        },
         props: true // Truyền các biến trong $route.params vào làm props
     },
     {
         path: "/store",
         name: "store",
         component: () => import("@/views/Store.vue"),
-        meta: { requiresAuth: true },
+        meta: { 
+            requiresAuth: true,
+            requiresAdmin: true 
+        },
         props: true // Truyền các biến trong $route.params vào làm props
     },
     {
         path: "/edit_product",
         name: "editproduct",
-        meta: { requiresAuth: true },
+        meta: { 
+            requiresAuth: true,
+            requiresAdmin: true 
+        },
         component: () => import("@/views/EditProduct.vue"),
         props: true // Truyền các biến trong $route.params vào làm props
     },
@@ -68,6 +86,19 @@ const routes = [
         name: "logout",
         meta: { requiresAuth: true },
         component: () => import("@/views/Logout.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+    {
+        path: "/home-page",
+        name: "home-user",
+        component: () => import("@/views/user/Home.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+    
+    {
+        path: "/cart",
+        name: "cart",
+        component: () => import("@/views/user/Cart.vue"),
         props: true // Truyền các biến trong $route.params vào làm props
     },
         
@@ -81,12 +112,16 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated =localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem("user"));
     if (to.meta.requiresAuth && !isAuthenticated) {
         confirm('Vui lòng đăng nhập')
         next('/'); // Chuyển hướng đến trang đăng nhập nếu người dùng chưa đăng nhập
     } else {
-      next(); // Cho phép truy cập nếu đã đăng nhập hoặc không yêu cầu đăng nhập
+        if(to.meta.requiresAdmin && !user.is_admin){
+            confirm('Không thể try cập.')
+            next('/home-page');
+        }
+        next()// Cho phép truy cập nếu đã đăng nhập hoặc không yêu cầu đăng nhập
     }
 });
-
 export default router;

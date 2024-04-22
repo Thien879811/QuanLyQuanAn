@@ -2,7 +2,13 @@
     <v-app id="inspire">
        
           <SideBarLeft />
-          <v-container v-if="!product_edit" class="container">
+
+          <div v-if="product_edit"  class="page mt-5">
+            <h4>Chỉnh sửa món ăn</h4>
+            <ProductForm v-if="product_edit" v-bind:products="product_edit" @submit:product="update"/>
+        </div>
+          
+          <v-container v-else class="container">
               <v-row class="mt-6">
                   <v-col cols="12" sm="4" v-for="product in product">
                       <v-hover v-slot="{ hover }" open-delay="200">
@@ -15,21 +21,15 @@
                                   <v-chip class="ma-2" color="grey lighten-3" text-color="red" dense>
                                       {{ product.price }}
                                   </v-chip> 
-                                  
                               </div>
                           </v-card>
                       </v-hover>
                   </v-col>
               </v-row>
-          </v-container>
-        
-          <ProductForm v-if="product_edit" v-bind:products="product_edit" @submit:product="update"/>
-          {{ message }}
-  
-          
+          </v-container> 
       </v-app>
   </template>
-  <script>
+<script>
   import ProductService from "@/services/product.service";
   import SideBarLeft from '@/components/SideBarLeft.vue';
   import ProductForm from '@/components/ProductForm.vue';
@@ -80,11 +80,11 @@
 }
   </script>
   
-  <style>
+<style>
   @media only screen and (max-width: 1960px) {
       .container{
           max-width: 1000px;
       }
   }
   
-  </style>
+</style>

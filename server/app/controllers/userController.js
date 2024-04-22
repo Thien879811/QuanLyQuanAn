@@ -6,13 +6,13 @@ const jwt = require ("jsonwebtoken")
 const asyncHandler = require("express-async-handler");
 
 exports.get = async (req, res, next) => {
-    res.send('dmmmmmmmmmmmm');
+    res.send('Hello');
 }
 
 // Create and Save a new Contact
 exports.register = async (req, res, next) => {
 
-    const {username, password} = req.body;
+    const {username, password, is_admin} = req.body;
     if(!username || !password){
         res.status(400);
         throw new ApiError("All fields are madatory");
@@ -30,6 +30,7 @@ exports.register = async (req, res, next) => {
     const user = userModel.create({
         username,
         password : hashedPassword,
+        is_admin,
     });
     console.log(`User created ${user}`);
 
@@ -46,8 +47,7 @@ exports.loginUser= async (req, res, next)=>{
     const {username, password} = req.body;
 
     if(!username || !password){
-        res.status(400).json({message:""});
-        throw new ApiError("All fields are madatory");
+        res.status(400).json({message:"All fields are madatory"});
     }
 
     const user = await userModel.findOne({ username });
@@ -70,6 +70,30 @@ exports.loginUser= async (req, res, next)=>{
     }
 }
 
+exports.updataUser = async(req,res)=>{
+    if(req.body){
+        const user = await userModel.findByIdAndUpdate(req.user.id,req.body)
+        res.send("update thanh cong")
+    }
+}
+
 exports.currentUser = async(req, res)=>{
-    res.send(req.user);
+    const user = await userModel.findById(req.user.id)
+    const userInfo ={
+        _id: user._id,
+        address: user.address,
+        name: user.name,
+        phone: user.phone,
+        is_admin: user.is_admin
+    }
+    res.send(userInfo);
 };
+
+
+///cart
+exports.getToCart = async(req,res)=>{
+    res.send("addd")
+}
+exports.addToCart = async(req,res)=>{
+    
+}

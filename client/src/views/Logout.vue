@@ -3,8 +3,7 @@ export default{
     methods:{
         logout(){
             localStorage.removeItem("token");
-            localStorage.removeItem("username");
-            localStorage.removeItem("id")
+            localStorage.removeItem("user");
             this.$router.push('/')
         }
     },

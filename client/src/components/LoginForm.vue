@@ -2,27 +2,28 @@
 <div class="login-group">
     <Form
         @submit ='submit'
+        :validation-schema="loginSchema"
     >
     <div class="form-group">
         <label for="name">Tài khoản</label>
-        <input
+        <Field
         name="username"
         type="text"
         class="form-control"
         v-model="user.username"
         />
-        <ErrorMessage name="name" class="error-feedback" />
+        <ErrorMessage name="username" class="error-feedback" />
     </div>
     
     <div class="form-group">
         <label for="email">Mật khẩu</label>
-        <input
+        <Field
         name="password"
         type="password"
         class="form-control"
         v-model="user.password"
         />
-        <ErrorMessage name="email" class="error-feedback" />
+        <ErrorMessage name="password" class="error-feedback" />
     </div>
 
     <div class="form-group">
@@ -44,11 +45,15 @@ export default{
 
     emits: ["submit:user"],
     data(){
+        const loginSchema = yup.object().shape({
+            username: yup.string().required("Tên đăng nhập không được để trống"),
+        })
         return {
             user:{
                 username:"",
                 password:""
-            }
+            },
+            loginSchema
         };
     },
     methods: {
