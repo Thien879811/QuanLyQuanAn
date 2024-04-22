@@ -135,12 +135,12 @@ export default {
         },
         axisY: {
           title: "",
-          prefix: "$"
+          prefix: ""
         },
         data: [{
           type: "line", // Change type to "bar", "area", "spline", "pie",etc.
           xValueFormatString: "MMM DD, YYYY",
-          yValueFormatString: "$#,###.00",
+          yValueFormatString: "#,###",
           markerSize: 0,
           dataPoints: [
           ]

@@ -27,13 +27,13 @@
             Đơn hàng
           </v-btn>
   
-          <v-btn>
+          <v-btn @click="logout()">
             Log Out
           </v-btn>
         </v-app-bar>
   
         <v-main class="mt-5">
-          <v-container>
+          <v-container v-if="!action">
             <h5>Giỏ hàng</h5>
               <v-card class="mt-3"  v-for="(product,index) in cartItems" :key="product._id">
                 <v-row>
@@ -71,34 +71,59 @@
               </v-card>
               <button class="btn btn-cus" @click="addProduct()">Đặt hàng</button>
           </v-container>
+
+          <v-container v-if="action">
+            <UserForm @submit:user="addInfoUser"/>
+          </v-container>
+          <pre>{{ message }}</pre>
         </v-main>
       </v-layout>
     </v-card>
   </template>
 <script>
+import orderService from '@/services/order.service';
+import UserForm from '@/components/UserFrom.vue'
 
     export default {
+      components:{
+        UserForm,
+      },
       data(){
           return {
+             action: false,
+              infoUser: null,
               cartItems: JSON.parse(localStorage.getItem('cart')) || [],
               products: null,
               select: [],
+              message:""
           }
       },
       methods:{
+        logout(){
+          this.$router.push('logout')
+        },
 
           async addProduct(){
-
+            const user = JSON.parse(localStorage.getItem('user'))
+            if(!this.infoUser){
+              confirm("Vui lòng nhập thông tin trước khi đặt hàng")
+              this.action=true
+              return;
+            }
+            const order ={
+                customerName: this.infoUser.name,
+                customer: user.id,
+                product: this.cartItems,
+                status: false
+            }
+            const res = await orderService.createOrderUser(order)
+            if(res){
+              confirm("Đặt hàng thành công")
+              this.cartItems=[],
+              this.saveCart()
+            }
+          
           },
-    
-          async getProduct(){
-                try{
-                    this.products = await ProductService.getAll();
-                }catch(err){
-                    console.log(err);
-                }
-          },
-  
         async tang(index){
             this.cartItems[index].quantity++;
             this.saveCart()
@@ -133,11 +158,14 @@
         checkout() {
             this.checkoutComplete = true
             this.saveCart()
+        },
+
+        addInfoUser(data){
+          this.infoUser=data;
+          this.addProduct();
+          this.action=false;
         }
       
-    },
-    created(){
-        this.getProduct();
     }
 }
 </script>

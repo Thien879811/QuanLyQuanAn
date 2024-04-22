@@ -22,16 +22,7 @@ export default {
             data: [{
                 type: "bar",
                 yValueFormatString: "#,###M tonnes",
-                dataPoints: [
-                    // { label: "Industrial Machinery", y: 3 },
-                    // { label: "Electrical/Electronic", y: 18 },
-                    // { label: "Transportation", y: 27 },
-                    // { label: "Consumer & Institutional Products", y: 42 },
-                    // { label: "Other sectors", y: 47 },
-                    // { label: "Textiles", y: 59 },
-                    // { label: "Building and Construction", y: 65 },
-                    // { label: "Packaging", y: 146 }
-                ]
+                dataPoints: []
             }]
         }
     }

@@ -18,6 +18,15 @@ class orderService {
     async create(data) {
         return (await this.api.post("/", data)).data;
     }
+    async createOrderUser(data) {
+        return (await this.api.post("/add-order-user", data)).data;
+    }
+    async getOrderUser(data) {
+        if(data){
+            return (await this.api.get(`/add-order-user/${data}`)).data;
+        }
+        return (await this.api.get("/add-order-user", data)).data;
+    }
     async deleteAll() {
         return (await this.api.delete("/")).data;
     }

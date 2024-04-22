@@ -27,7 +27,7 @@
           Đơn hàng
         </v-btn>
 
-        <v-btn>
+        <v-btn @click="logout">
           Log Out
         </v-btn>
       </v-app-bar>
@@ -84,6 +84,9 @@
         }
     },
     methods:{
+      logout(){
+          this.$router.push('logout')
+        },
   
         async getProduct(){
               try{

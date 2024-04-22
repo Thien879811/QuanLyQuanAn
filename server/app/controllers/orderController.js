@@ -1,6 +1,7 @@
 const Error = require("../api-error");
 const order = require("../models/orderModel");
 const product = require("../models/productModel");
+const { param } = require("../routes/orderRoutes");
 
 exports.getOrderByDate = async (req, res, next) => {
   if(req.params.data){
@@ -196,10 +197,33 @@ exports.findAll = async (req, res, next)=>{
     }
     res.send(documents);
 }
+exports.getOrderOnline = async (req, res, next) => {
+  if(req.param.id){
+    const document = await order.find({customer:req.param.id});
+    return res.send(document);
+  }
+
+  const document = await order.find({ status:false });
+  return res.send(document);
+}
+
+exports.createOrder = async (req, res, next) => {
+  if (!req.body) {
+      return next(new Error(400, "Name can not be empty"));
+  }
+  try {
+      const document = await order.create(req.body);
+      return res.send(document);
+  } catch (error) {
+      return next(
+          new Error(500, "An error occurred while creating the contact")
+      );
+  }
+};
 
 exports.createMenu = async (req, res, next) => {
 
-    if (!req.body?.customer) {
+    if (!req.body) {
         return next(new Error(400, "Name can not be empty"));
     }
 // Kiem tr xem co ton tai order cua khach hang truoc do
