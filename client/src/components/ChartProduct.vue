@@ -21,7 +21,7 @@ export default {
             },
             data: [{
                 type: "bar",
-                yValueFormatString: "#,###M tonnes",
+                yValueFormatString: "#",
                 dataPoints: []
             }]
         }

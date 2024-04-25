@@ -36,8 +36,10 @@
         </v-app-bar>
   
         <v-main class="mt-5">
+
           <v-container v-if="!action">
             <h5>Giỏ hàng</h5>
+              
               <v-card class="mt-3"  v-for="(product,index) in cartItems" :key="product._id">
                 <v-row>
                     <v-col cols="1" class="d-flex justify-content-center">
@@ -72,13 +74,16 @@
                     </v-col>
                 </v-row>
               </v-card>
-              <button class="btn btn-cus" @click="addProduct()">Đặt hàng</button>
+              <div v-if="cartItems.length == 0">Không có sản phẩm trong giỏ hàng</div>
+              <button v-if="cartItems.length != 0" class="btn btn-cus" @click="addProduct()">Đặt hàng</button>
           </v-container>
+
+
 
           <v-container v-if="action">
             <UserForm @submit:user="addInfoUser"/>
           </v-container>
-          <pre>{{ message }}</pre>
+          <!-- <pre>{{ select }}</pre> -->
         </v-main>
       </v-layout>
     </v-card>
@@ -109,6 +114,10 @@ import UserForm from '@/components/UserFrom.vue'
 
           async addProduct(){
             const user = JSON.parse(localStorage.getItem('user'))
+            if(this.select.length == 0){
+              confirm("Vui lòng chọn sản phẩm")
+              return;
+            }
             if(!this.infoUser){
               confirm("Vui lòng nhập thông tin trước khi đặt hàng")
               this.action=true
@@ -117,7 +126,7 @@ import UserForm from '@/components/UserFrom.vue'
             const order ={
                 customerName: this.infoUser.name,
                 customer: user._id,
-                product: this.cartItems,
+                product: this.select,
                 status: false
             }
             const res = await orderService.createOrderUser(order)
@@ -133,6 +142,11 @@ import UserForm from '@/components/UserFrom.vue'
             this.saveCart()
         },
         async giam(index){
+          if(this.cartItems[index].quantity == 1)
+            {
+              this.removeItem(this.cartItems[index])
+              return;
+            }
             this.cartItems[index].quantity--;
             this.saveCart()
         },
@@ -151,7 +165,7 @@ import UserForm from '@/components/UserFrom.vue'
         },
   
         removeItem(item) {
-            this.cartItems = this.cartItems.filter(i => i.id !== item.id)
+            this.cartItems = this.cartItems.filter(i => i._id !== item._id)
             this.saveCart()
         },
   

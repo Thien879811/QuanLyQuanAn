@@ -38,6 +38,7 @@
         <v-main class="mt-5">
           <v-container >
             <h5>Đơn hàng</h5>
+  
               <v-card class="mt-3"  v-for="(product,index) in orders" :key="product._id">
                 <v-row>
                     <v-col>
@@ -63,7 +64,7 @@
                     </v-col>
                 </v-row>
               </v-card>
-              
+              <div v-if="orders.length == 0">Không có đơn hàng</div>
           </v-container>
         </v-main>
       </v-layout>
