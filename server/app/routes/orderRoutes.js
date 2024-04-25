@@ -15,6 +15,7 @@ router.route("/")
 router.route("/add-order-user")
     .get(Order.getOrderOnline)
     .post(Order.createOrder)
+    
 router.route("/add-order-user/:id")
     .get(Order.getOrderOnline)
 
@@ -41,5 +42,6 @@ router.route("/total-sales-chart")
 router.route("/count-product")
     .get(Order.countProductOccurrences)
     
- 
+router.route("/order_delete")
+    .delete(Order.delete)
 module.exports = router;

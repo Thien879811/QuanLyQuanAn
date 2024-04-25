@@ -9,6 +9,10 @@ class userService{
         return (await this.api.post("/login",data)).data;
     }
 
+    async signup(data){
+        return (await this.api.post("/register",data)).data;
+    }
+
     async current(token) {
         try {
             // Gửi token về máy chủ trong phần header

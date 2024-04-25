@@ -101,6 +101,18 @@ const routes = [
         component: () => import("@/views/user/Cart.vue"),
         props: true // Truyền các biến trong $route.params vào làm props
     },
+    {
+        path: "/signup",
+        name: "signup",
+        component: () => import("@/views/user/SignUp.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
+    {
+        path: "/order",
+        name: "order",
+        component: () => import("@/views/user/Order.vue"),
+        props: true // Truyền các biến trong $route.params vào làm props
+    },
         
 ];
 

@@ -15,11 +15,6 @@
                 </v-col>
             </v-row>
         </v-list-item>
-        <v-container>
-            <v-list>
-                <v-list-item>Đơn hàng chưa hoàn thành</v-list-item>
-            </v-list>
-        </v-container>
     </v-navigation-drawer>
 </template>
 

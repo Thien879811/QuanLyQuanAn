@@ -3,6 +3,10 @@ const order = require("../models/orderModel");
 const product = require("../models/productModel");
 const { param } = require("../routes/orderRoutes");
 
+exports.delete = async(req,res,next)=>{
+ console.log(req.query)
+}
+
 exports.getOrderByDate = async (req, res, next) => {
   if(req.params.data){
     let query = {};
@@ -198,8 +202,9 @@ exports.findAll = async (req, res, next)=>{
     res.send(documents);
 }
 exports.getOrderOnline = async (req, res, next) => {
-  if(req.param.id){
-    const document = await order.find({customer:req.param.id});
+  console.log(req.params.id)
+  if(req.params.id){
+    const document = await order.find({customer:req.params.id});
     return res.send(document);
   }
 

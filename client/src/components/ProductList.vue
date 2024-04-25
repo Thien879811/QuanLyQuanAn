@@ -15,6 +15,9 @@
             <th class="text-left">
             Total
             </th>
+            <th class="text-left">
+            Option
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +30,7 @@
                     <button class="btn" @click="increased(product)">+</button>
                 </td>
                 <td>{{ product.quantity*product.price }}</td>
+                <td><button @click="delete(product._id)"><font-awesome-icon :icon="['fas', 'trash']" /></button></td>
             </tr>
         </tbody>
        
@@ -136,6 +140,14 @@ import tableService from "@/services/table.service";
                         let docoment = await orderService.update(this.orders._id, this.orders)
                         confirm("Thành công")
                         location.reload()
+                    }catch(err){
+                        console.log(err)
+                    }
+                },
+
+                async delete(id){
+                    try{
+                       const res = await orderService.delete(id)
                     }catch(err){
                         console.log(err)
                     }

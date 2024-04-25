@@ -22,10 +22,11 @@ class orderService {
         return (await this.api.post("/add-order-user", data)).data;
     }
     async getOrderUser(data) {
+        console.log(data)
         if(data){
             return (await this.api.get(`/add-order-user/${data}`)).data;
         }
-        return (await this.api.get("/add-order-user", data)).data;
+        return (await this.api.get("/add-order-user")).data;
     }
     async deleteAll() {
         return (await this.api.delete("/")).data;
@@ -37,7 +38,7 @@ class orderService {
         return (await this.api.put(`/${id}`, data)).data;
     }
     async delete(id) {
-        return (await this.api.delete(`/${id}`)).data;
+        return (await this.api.delete(`/product/${id}`)).data;
     }
     async search(id) {
         return (await this.api.get(`/search/${id}`)).data;

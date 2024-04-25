@@ -7,6 +7,7 @@
             <UserForm
                 @submit:user="login"
         />
+        Bạn chưa có tài khoản? <button @click="signup()" class="text-cus">Đăng ký</button>
         </div>
     </div>
 </template>
@@ -50,6 +51,9 @@ export default{
                 console.log(error);
             }
         },
+        signup(){
+            this.$router.push('/signup');
+        }
 
     },
 }
@@ -66,5 +70,8 @@ export default{
     border: solid 1px darkblue;
     border-radius: 5px;
     box-shadow: 10px 10px;
+}
+.text-cus{
+    color: blue;
 }
 </style>

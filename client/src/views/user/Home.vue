@@ -23,12 +23,15 @@
           Giỏ hàng
         </v-btn>
 
-        <v-btn>
-          Đơn hàng
-        </v-btn>
+        <v-btn @click="order()">
+            Đơn hàng
+          </v-btn>
 
-        <v-btn @click="logout">
+        <v-btn v-if="user" @click="logout">
           Log Out
+        </v-btn>
+        <v-btn v-else @click="login()">
+          Log in
         </v-btn>
       </v-app-bar>
 
@@ -58,7 +61,6 @@
           </v-row>
         </v-container>
       </v-main>
-
     </v-layout>
   </v-card>
 </template>
@@ -75,6 +77,7 @@
     },
     data(){
         return {
+            user: JSON.parse(localStorage.getItem('user')) || null,
             cartItems: JSON.parse(localStorage.getItem('cart')) || [],
             products: null,
             product_edit: null,
@@ -140,11 +143,24 @@
         },
         home(){
             this.$router.push('/home-page')
-        }
+        },
+        getUser(){
+          const users =JSON.parse(localStorage.getItem('user'))
+          if(users){
+            this.user = users
+          }
+        },
+        login(){
+          this.$router.push('/')
+        },
+        order(){
+            this.$router.push('/order')
+        },
     
     },
     created(){
           this.getProduct();
+          
     }
 }
   </script>

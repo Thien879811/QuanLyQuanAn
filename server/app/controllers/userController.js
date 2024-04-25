@@ -12,7 +12,7 @@ exports.get = async (req, res, next) => {
 // Create and Save a new Contact
 exports.register = async (req, res, next) => {
 
-    const {username, password, is_admin} = req.body;
+    const {username, password} = req.body;
     if(!username || !password){
         res.status(400);
         throw new ApiError("All fields are madatory");
@@ -30,7 +30,6 @@ exports.register = async (req, res, next) => {
     const user = userModel.create({
         username,
         password : hashedPassword,
-        is_admin,
     });
     console.log(`User created ${user}`);
 
