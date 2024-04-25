@@ -12,7 +12,7 @@
                 </v-col>
             </v-row>
         </v-card-item>
-        <v-card-text>Khách hàng: Bàn {{ order_local.customerName }}</v-card-text>
+        <v-card-text>Khách hàng: {{ order_local.customerName }}</v-card-text>
         <v-card-text>Ngày tạo: {{ order_local.createdAt }}</v-card-text>
         <v-table>
             <thead>

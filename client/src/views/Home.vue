@@ -161,7 +161,7 @@ export default {
             try{
                 const docoment = await orderService.create(order);
                 if(docoment){
-                    confirm("Them thanh cong")
+                    confirm("Thêm món thành công")
                 }
             }catch(err){
                 console.log(err)
@@ -190,7 +190,7 @@ export default {
 <style>
 @media only screen and (max-width: 1960px) {
     .container{
-        max-width: 1000px;
+        max-width: 900px;
     }
 }
 

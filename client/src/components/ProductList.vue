@@ -1,6 +1,6 @@
 <template>
     <h4>Bàn: {{ tableName }}</h4>
-    <v-table height="600px"  fixed-header>
+    <v-table height="500px"  fixed-header>
         <thead>
         <tr >
             <th class="text-left">
