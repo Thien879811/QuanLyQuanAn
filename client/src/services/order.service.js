@@ -38,7 +38,7 @@ class orderService {
         return (await this.api.put(`/${id}`, data)).data;
     }
     async delete(id) {
-        return (await this.api.delete(`/product/${id}`)).data;
+        return (await this.api.delete(`/${id}`)).data;
     }
     async search(id) {
         return (await this.api.get(`/search/${id}`)).data;

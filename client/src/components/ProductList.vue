@@ -30,7 +30,11 @@
                     <button class="btn" @click="increased(product)">+</button>
                 </td>
                 <td>{{ product.quantity*product.price }}</td>
-                <td><button @click="delete(product._id)"><font-awesome-icon :icon="['fas', 'trash']" /></button></td>
+                <td>
+                    <button @click="delete_order(product._id)">
+                        <font-awesome-icon :icon="['fas', 'trash']" />
+                    </button>
+                </td>
             </tr>
         </tbody>
        
@@ -73,7 +77,6 @@ import tableService from "@/services/table.service";
                     //get name table
                         const table = await tableService.get(this.table_id)
                         this.tableName = table.tableName
-                        console.log(this.tableName)
                     }catch(err){
                         console.log(err);
                     }
@@ -145,11 +148,11 @@ import tableService from "@/services/table.service";
                     }
                 },
 
-                async delete(id){
-                    try{
-                       const res = await orderService.delete(id)
-                    }catch(err){
-                        console.log(err)
+                async delete_order(id){
+                    if(id){
+                        const removeIndex = this.orders.product.findIndex(p => p._id == id)
+                        const order_delete = this.orders.product.splice( removeIndex, 1 );
+                        await orderService.update(this.orders._id,this.orders)
                     }
                 }
 
